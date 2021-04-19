@@ -17,7 +17,7 @@ The application should have 2 screens:
 ### Home
 - list of timers to be run (use should be able to Remove a timer)
 - the total time the workout will take
-- controls to start/pause/reset workout
+- controls to start/pause workout
 - button to "Add" a new timer
 
 ### Configure Timer
