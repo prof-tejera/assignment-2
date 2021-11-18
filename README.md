@@ -1,43 +1,67 @@
-# Assignment 3
+# Objective for Assignment 3
 
-This is the 3rd and last assignment for E-39 Design Principles in React. Here we will continue to work on our timers from Assignment 2, using them to build a full application that can be deployed and used for workouts.
+This is the 3rd and last assignment (A3) for E-39 Design Principles in React. Using out timers from Assignment 2 (A2), we will build a workout app that allows our users to assemble **multiple timers** into a workout queue. This workout queue will be executed in the order that the timers were added. Let's take a look at an example:
 
-## Requirements
-In assignment 2 we built 4 independent timers: Countdown, Stopwatch, XY and TABATA. The final Workout Timer application allows users to add multiple timers that can run sequentially. For example, the user can choose to configure their workout as follows:
+![Workout example 1](images/example_workout.png)
 
-- Coundown:   10:00
-- XY:         6 rounds of 30 seconds
-- Coundown:   5:00
-- TABATA:     8 rounds, 20s work/10s rest
+## Structural Changes to Context
 
-Total time:   10:00 + 3:00 + 5:00 + 4:00 = 22:00
+We will have to make changes to our context in order to support the requirements for A3. In A2 we had to store the state of only one timer that we were configuring, now we will have to store all of the timers that the user has configured and the order that the timers will be executed when the user runs the workout. The order that the timers are created is the order in which they are executed.
 
-The application should have 2 screens:
+The choice of data structure should be a queue, which follows First-In-First-Out, and supports the normal enqueue (add item to the queue) and dequeue (removes item from the queue). How you implement the queue is up to you, but things to consider are that:
 
+1. Each timer can be in one of three states: running, completed, and not run. You will need a way to keep track of what state the timer is in, so that you can display it accordingly (see the image above) 
+2. During configuration, the user can remove any timer from the queue, so you will be supporting deleting
+3. While the timer is running, you will need to store which timer is active. 
+4. You don't want to clear the configurations as the timers are running. The user should be able to restart the entire workout at anytime
+
+## Changes to Routing
+
+Currently we have two routes `/` and `/docs`. We are going to be modifying our `/` screen and add a new one called `/add` using react-router.
 ### Home - Path should be `/`
-- list of timers to be run (use should be able to Remove a timer)
-- the total time the workout will take
-- controls to start/pause workout
-- button to "Add" a new timer
+
+- List of timers to be run for a workout. User should be able to remove a timer
+- The total time the workout will take
+- A button to "Add" a new timer. This button brings the user to the `/add` screen
+- Controls to Pause/Resume the workout
+- Controls to reset the workout back to its initial state
+- Controls to "fast-forward" - ends the current running timer and moves onto the next one
 
 ### Add Timer - Path should be `/add`
-When user clicks "Add" from **Home** screen, they are routed to this page, where they can choose the type of timer and configure its options (`timeCap`, `startTime`, `rounds`, `timePerRound` or `workTime`/`restTime`) depending on what timer is selected. After configuring, they user confirms and the timer is added to the list.
 
-## Running the Timer
-When the user starts the workout from the Home screen, the app shows the current Timer depending on time. In the example above it would go as follows:
+- When user clicks "Add" from **Home** screen, they are routed to this page, where they can choose the type of timer and configure all inputs for each timer. After configuring, the user confirms and the timer is added to the list.
+- The `/add` page should allow the user to configure any of the four timers (stopwatch, countdown, XY, and tabata)
+- The user should be able to go back to the home page from here
+## Installing and Running the project
 
-- Display shows Countdown for first 10:00
-- Then switches to XY, running 6 rounds of 30s each
-- Then shows Countdown for 5:00
-- Finally shows TABATA for 8 rounds of 20s/10s
+As you have noticed this repository is empty. To begin this assignment you must copy over all of our files from A2 into this repo. **Do not copy over the `.git` directory and the `.gitignore` file.**. 
 
-## Design
-As always, provide a clear explanation for your design choices in a DESIGN.md file. The slides shown in lecture are for illustrative purposes so you don't have to follow them for your application. The only requirement in user flow is that there are two separate pages, Home and Add as described above.
+## Deliverable
+- A user can configure (combination of any timers in any order) and execute a workout 
+- All four timers must be functional: stopwatch, countdown, tabata, and XY.
+- Routing must be configured to support the home route (`/`) and add route (`/add`)
+- As you make modifications to your generic components, make sure to update documentation and prop-types. 
 
-## Things to remember
-- compose and abstract functionality to DRY your code
-- clean up your timers and avoid memory leaks and state that could lead to infinite loops
-- adhere to the spec of each timer
 
-## Deliverables
-Because this is an extension on Assignment 2, you can clone this repo and copy over all files from A2 into here (except the .git folder). As usual, we should be able to run your project simply with `npm install` and `npm start`.
+## Grading Rubric
+- A workout can be configured with any combination of timers
+- Final workout application should be bug free
+- DRY (do not repeat yourself). Try to make sure common code is shared and not copy/pasted
+- Console is free of warnings/errors
+- Documentation and prop-types are defined and accurate
+### Deployment Instructions (GH actions)
+
+- Go to `Settings`
+- Go to `Pages`
+- in `Source`, select `gh-pages` branch
+- Click Save
+- In `package.json`, add a new key/value as: `"homepage": "https://prof-tejera.github.io/<repo>"`
+
+Once the `build-deploy` action finishes running, the app should be live
+at `https://prof-tejera.github.io/<repo>`
+
+For other ways to deploy see https://github.com/prof-tejera/react-deployment-code
+
+## Bonus
+
+- Add full test coverage using Cypress.io. This will require that you get your tests running locally and then add a new Github action that will run the tests every time you commit to GitHub. Note that the Cypress setup is not part of this project and must be configured by you (max 8 points)
