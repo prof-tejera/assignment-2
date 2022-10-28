@@ -42,7 +42,6 @@ As you have noticed this repository is empty. To begin this assignment you must 
 - A user can configure (combination of any timers in any order) and execute a workout 
 - All four timers must be functional: stopwatch, countdown, tabata, and XY.
 - Routing must be configured to support the home route (`/`) and add route (`/add`)
-- As you make modifications to your generic components, make sure to update documentation and prop-types. 
 
 ## Grading Rubric
 - A workout can be configured with any combination of timers
