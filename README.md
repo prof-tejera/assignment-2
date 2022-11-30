@@ -44,7 +44,7 @@ As you have noticed this repository is empty. To begin this assignment you must 
 - Routing must be configured to support the home route (`/`) and add route (`/add`)
 
 ## Grading Rubric
-- A workout can be configured with any combination of timers
+- A workout can be configured with any combination of timers. Individual timers can be configured by the user.
 - Final workout application should be bug free
 - DRY (do not repeat yourself). Try to make sure common code is shared and not copy/pasted
 - Console is free of warnings/errors
