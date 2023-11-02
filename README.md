@@ -6,7 +6,7 @@ This is the 2nd assignment (A2) for E-39 Design Principles in React. Using our t
 
 ## Structural Changes to Context
 
-We will have move state from our timers and into a global context that will be shared by the app. In A1 we had to store the state of only one timer that we were configuring, now we will have to store all of the timers that the user has configured and the order that the timers will be executed when the user runs the workout. The order that the timers are created is the order in which they are executed.
+We will start by moving timer state into a global context that will be shared by the app. In A1 we had to store the state of only one timer that we were configuring, now we will have to store all of the timers that the user has configured and the order that the timers will be executed when the user runs the workout. The order that the timers are created is the order in which they are executed.
 
 The choice of data structure should be a queue, which follows First-In-First-Out, and supports the normal enqueue (add item to the queue) and dequeue (removes item from the queue). How you implement the queue is up to you, but things to consider are that:
 
